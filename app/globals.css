@@ -20,12 +20,18 @@
   --color-border: oklch(0.922 0 0);
   --color-input: oklch(0.922 0 0);
   --color-ring: oklch(0.708 0 0);
+
+  /* Brand accent — warm amber/gold, evokes voice, warmth, premium audio */
+  --color-vox: oklch(0.82 0.16 72);
+  --color-vox-soft: oklch(0.82 0.16 72 / 0.15);
+
   --radius: 0.625rem;
 }
 
 @media (prefers-color-scheme: dark) {
   @theme {
-    --color-background: oklch(0.145 0 0);
+    /* Slightly warmed near-black so the amber accent feels intentional */
+    --color-background: oklch(0.13 0.005 60);
     --color-foreground: oklch(0.985 0 0);
     --color-card: oklch(0.145 0 0);
     --color-card-foreground: oklch(0.985 0 0);
@@ -55,4 +61,31 @@ body {
   background-color: theme(colors.background);
   color: theme(colors.foreground);
   font-family: var(--font-geist-sans), sans-serif;
+}
+
+/* Waveform / equalizer animation used in hero visual */
+@keyframes vox-wave {
+  0%, 100% { transform: scaleY(0.25); opacity: 0.55; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+.vox-bar {
+  transform-origin: center;
+  animation: vox-wave 1.4s ease-in-out infinite;
+}
+
+/* Slow ambient pulse for accent glows */
+@keyframes vox-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.04); }
+}
+
+.vox-pulse {
+  animation: vox-pulse 6s ease-in-out infinite;
+}
+
+/* Subtle marquee-able shine for the brand pill */
+@keyframes vox-shine {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
